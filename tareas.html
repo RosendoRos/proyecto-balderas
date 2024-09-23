@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="preload" href="css/tareas.css" as="styles">
+    <link href="css/tareas.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Barra de navegación -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Gestión de Proyectos</a></li>
+            <li><a href="tareas.html">Gestión de Tareas</a></li>
+            <li><a href="colaboracion.html">Colaboración en Tiempo Real</a></li>
+            <li><a href="contacto.html">Seguimiento de Progreso y Reportes</a></li>
+        </ul>
+    </nav>
+
+    <!-- Buscador de tareas -->
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Buscar tarea...">
+        <button onclick="buscarTarea()"><img src="./img/lupa.png" alt="Buscar" width="20"></button>
+    </div>
+
+    <section class="servicio">
+        <h2>Gestión de Tareas</h2>
+        <p>Este apartado permitirá dividir el proyecto en tareas específicas que se puedan asignar a los miembros del equipo. Controlar el estado y el progreso de cada tarea es crucial para el éxito del proyecto.</p>
+        <h3>Subfunciones importantes:</h3>
+        <ul>
+            <li>Crear y asignar tareas</li>
+            <li>Establecer prioridades y fechas límite</li>
+            <li>Visualizar el estado de las tareas</li>
+        </ul>
+
+        <h3>Agregar Nueva Tarea</h3>
+        <input type="text" placeholder="Título de la tarea" id="nuevaTarea" />
+        <input type="date" id="nuevaFecha" />
+        <button class="button" onclick="agregarTarea()">Agregar Tarea</button>
+
+        <table class="table" id="tablaTareas">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Fecha Límite</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Tarea Ejemplo 1</td>
+                    <td>2024-09-30</td>
+                    <td><span class="complete-icon" onclick="toggleEstado(this)">⬜</span></td>
+                    <td>
+                        <button class="button">Editar</button>
+                        <button class="button" style="background-color: #dc3545;">Eliminar</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Tarea Ejemplo 2</td>
+                    <td>2024-10-05</td>
+                    <td><span class="complete-icon" onclick="toggleEstado(this)">✔️</span></td>
+                    <td>
+                        <button class="button">Editar</button>
+                        <button class="button" style="background-color: #dc3545;">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <script>
+        function toggleEstado(element) {
+            if (element.textContent === "✔️") { // Si está completada
+                element.textContent = "⬜"; // Volver a pendiente
+                element.classList.remove("checked"); // Cambia el color a rojo
+            } else {
+                element.textContent = "✔️"; // Marcar como completada
+                element.classList.add("checked"); // Cambia el color a verde
+            }
+        }
+
+        function buscarTarea() {
+            const input = document.getElementById("searchInput").value.toLowerCase();
+            const rows = document.querySelectorAll("#tablaTareas tbody tr");
+
+            rows.forEach(row => {
+                const title = row.querySelector("td").textContent.toLowerCase();
+                if (title.includes(input)) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        }
+
+        function agregarTarea() {
+            const titulo = document.getElementById("nuevaTarea").value;
+            const fecha = document.getElementById("nuevaFecha").value;
+            const tabla = document.getElementById("tablaTareas").querySelector("tbody");
+
+            if (titulo && fecha) {
+                const nuevaFila = document.createElement("tr");
+                nuevaFila.innerHTML = `
+                    <td>${titulo}</td>
+                    <td>${fecha}</td>
+                    <td><span class="complete-icon" onclick="toggleEstado(this)">⬜</span></td>
+                    <td>
+                        <button class="button">Editar</button>
+                        <button class="button" style="background-color: #dc3545;">Eliminar</button>
+                    </td>
+                `;
+                tabla.appendChild(nuevaFila);
+            } else {
+                alert("Por favor, complete todos los campos.");
+            }
+        }
+    </script>
+
+</body>
+</html>
