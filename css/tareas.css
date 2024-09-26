@@ -36,17 +36,6 @@ nav ul li a:hover {
     color: #b4e4eb;
 }
 
-/* Menú hamburguesa oculto inicialmente */
-.menu-hamburguesa {
-    display: none;
-    font-size: 30px;
-    color: white;
-    cursor: pointer;
-    position: absolute;
-    top: 15px;
-    right: 20px;
-}
-
 /* Media query para pantallas pequeñas */
 @media (max-width: 768px) {
     nav ul {
@@ -60,12 +49,6 @@ nav ul li a:hover {
     nav ul li {
         display: block;
         margin: 10px 0;
-    }
-
-    .menu-hamburguesa {
-        display: block;
-        color: white; /* Aseguramos que el ícono sea visible */
-        z-index: 1000; /* Lo traemos al frente en caso de solapamiento */
     }
 
     /* Mostrar menú cuando esté activo */
