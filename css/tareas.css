@@ -4,7 +4,6 @@ html, body {
     background-color: #f0f8ff;
 }
 
-/* Estilos del nav */
 nav {
     background-color: #008080;
     padding: 5px; 
@@ -39,21 +38,16 @@ nav ul li a:hover {
 /* Media query para pantallas pequeñas */
 @media (max-width: 768px) {
     nav ul {
-        display: none;
-        flex-direction: column;
+        display: flex;
+        flex-direction: column; /* Cambia a columna para que se muestre verticalmente */
         width: 100%;
         text-align: center;
         background-color: #008080;
     }
 
     nav ul li {
-        display: block;
+        display: block; /* Asegúrate de que los elementos de la lista se muestren como bloques */
         margin: 10px 0;
-    }
-
-    /* Mostrar menú cuando esté activo */
-    nav ul.active {
-        display: flex;
     }
 }
 
