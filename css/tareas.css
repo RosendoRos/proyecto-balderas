@@ -9,6 +9,7 @@ nav {
     padding: 5px; 
     margin: 0; 
     width: 100%; 
+    position: relative;
 }
 
 nav ul {
@@ -20,7 +21,7 @@ nav ul {
 }
 
 nav ul li {
-    display: inline;
+    display: inline-block;
 }
 
 nav ul li a {
@@ -31,8 +32,44 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    color: #b4e4eb;}
+    color: #b4e4eb;
+}
 
+/* Menú hamburguesa oculto inicialmente */
+.menu-hamburguesa {
+    display: none;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 768px) {
+    nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        background-color: #008080;
+    }
+
+    nav ul li {
+        display: block;
+        margin: 10px 0;
+    }
+
+    .menu-hamburguesa {
+        display: block;
+    }
+
+    /* Mostrar menú cuando esté activo */
+    nav ul.active {
+        display: flex;
+    }
+}    
 
 h1, h2 {
     color: #333;
