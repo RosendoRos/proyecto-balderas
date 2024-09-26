@@ -112,34 +112,55 @@
         <!-- Formulario para agregar nuevas tareas -->
         <div id="formularioTarea" style="display: none;">
             <h3 id="tituloFormulario">Agregar Nueva Tarea</h3>
-            <div class="task-form">
-                <label for="nombreTarea">Nombre:</label>
-                <input type="text" id="nuevaTarea" placeholder="Título de la tarea" required>
-                <label for="fecha">Fecha:</label>
-                <input type="date" id="nuevaFecha" required>
-                <label for="miembro">Miembro:</label>
-                <select id="miembroSeleccionado" required>
-                    <option value="">Seleccionar miembro</option>
-                </select>
-                <label for="prioridad">Prioridad:</label>
-                <select id="prioridadSeleccionada">
-                    <option value="">Seleccionar Prioridad</option>
-                    <option value="baja">baja</option>
-                    <option value="normal" selected>normal</option>
-                    <option value="alta">alta</option>
-                </select>
+            <form class="task-form">
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label for="nuevaTarea">Nombre:</label>
+                        <input type="text" class="form-control" id="nuevaTarea" placeholder="Título de la tarea" required>
+                    </div>
+        
+                    <!-- Campo Fecha -->
+                    <div class="col-md-3 mb-3">
+                        <label for="nuevaFecha">Fecha:</label>
+                        <input type="date" class="form-control" id="nuevaFecha" required>
+                    </div>
 
-                <div class="task-form">
-                    <label for="detalles">Detalles:</label>
-                    <textarea id="detalles" rows="4" placeholder="Detalles de la tarea"></textarea>
-                </div>                
-
-                <div class="button-group" style="text-align: right;">
-                    <button id="botonGuardar" class="btn btn-primary" onclick="agregarTarea()">Agregar Tarea</button>
-                    <button class="btn btn-danger" onclick="ocultarFormularioTarea()">Cancelar</button>
+                    <div class="col-md-3 mb-3">
+                        <label for="miembroSeleccionado">Miembro:</label>
+                        <select id="miembroSeleccionado" class="form-control" required>
+                            <option value="">Seleccionar miembro</option>
+                        </select>
+                    </div>
+                    
+                    <div class="col-md-3">
+                        <label for="prioridadSeleccionada">Prioridad:</label>
+                        <select id="prioridadSeleccionada" class="form-control">
+                            <option value="">Seleccionar Prioridad</option>
+                            <option value="baja">baja</option>
+                            <option value="normal" selected>normal</option>
+                            <option value="alta">alta</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
+        
+                <!-- Campo Detalles (ocupa toda la fila) -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="detalles">Detalles:</label>
+                        <textarea id="detalles" class="form-control" rows="4" placeholder="Detalles de la tarea"></textarea>
+                    </div>
+                </div>
+        
+                <!-- Botones de acción -->
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <button id="botonGuardar" class="btn btn-primary" onclick="agregarTarea()">Agregar Tarea</button>
+                        <button type="button" class="btn btn-danger" onclick="ocultarFormularioTarea()">Cancelar</button>
+                    </div>
+                </div>
+            </form>
         </div>
+        
 
         <!-- Formulario para agregar miembros -->
         <div id="formularioMiembro" style="display: none;">
