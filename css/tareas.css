@@ -169,62 +169,80 @@ th{
 .task-form input[type="text"],
 .task-form input[type="date"],
 .task-form input[type="email"],
-.task-form select{
-    width: 50%;  
-    max-width: 225px;
-    padding: 10px;  
-    margin: 8px 0; 
-    border: 1px solid #ccc;  
-    border-radius: 5px; 
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  
-    font-size: 16px;  
-    transition: border-color 0.3s, box-shadow 0.3s;  
+.task-form select {
+    width: 100%;  /* Cambiado a 100% para pantallas pequeñas */
+    max-width: 400px;  /* Ancho máximo para pantallas grandes */
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .task-form textarea {
     width: 100%;
-    padding: 10px; 
+    padding: 10px;
     border: 1px solid #ced4da;
-    border-radius: 0.25rem; 
+    border-radius: 0.25rem;
     font-size: 16px;
-    resize: vertical; 
+    resize: vertical;
 }
 
 .task-form input[type="text"]:focus,
 .task-form input[type="date"]:focus,
 .task-form input[type="email"]:focus,
 .task-form select:focus {
-    border-color: #007bff;  
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
-    outline: none;  
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
 }
 
 .task-form textarea:focus {
-    border-color: #007bff; 
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
-    outline: none; 
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
 }
 
 .task-form button {
-    padding: 10px 20px; 
-    border-radius: 7px; 
-    font-size: 16px;  
-    cursor: pointer;  
-    text-align: right;
+    padding: 10px 20px;
+    border-radius: 7px;
+    font-size: 16px;
+    cursor: pointer;
 }
 
 .task-form button.btn-danger {
-    background-color: #dc3545;  
-    border: none;  
+    background-color: #dc3545;
+    border: none;
 }
 
 .task-form button.btn-primary {
-    background-color: #007bff;  
-    border: none;  
+    background-color: #007bff;
+    border: none;
 }
 
 .task-form button:hover {
-    opacity: 0.9; 
+    opacity: 0.9;
+}
+
+/* Media Query para pantallas pequeñas */
+@media (max-width: 768px) {
+    .task-form input[type="text"],
+    .task-form input[type="date"],
+    .task-form input[type="email"],
+    .task-form select {
+        width: 100%;  /* Los inputs ocupan todo el ancho */
+    }
+
+    .button-group {
+        text-align: center; /* Centrar los botones en pantallas pequeñas */
+    }
+
+    .task-form button {
+        width: 100%; /* Botones a todo el ancho en pantallas pequeñas */
+        margin-top: 10px;
+    }
 }
 
 nav#paginacion {

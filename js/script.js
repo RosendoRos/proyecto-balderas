@@ -295,7 +295,6 @@ function toggleMenu() {
     menuOpciones.style.display = (menuOpciones.style.display === "none" || menuOpciones.style.display === "") ? "block" : "none";
 }
 
-
 function buscarTarea() {
     const input = document.getElementById("searchInput").value.toLowerCase();
     const tabla = document.getElementById("tablaTareas");
