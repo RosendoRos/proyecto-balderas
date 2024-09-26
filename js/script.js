@@ -301,6 +301,7 @@ function toggleMenuHamburguesa() {
 }
 
 
+
 function buscarTarea() {
     const input = document.getElementById("searchInput").value.toLowerCase();
     const tabla = document.getElementById("tablaTareas");

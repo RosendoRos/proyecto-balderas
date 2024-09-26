@@ -4,6 +4,7 @@ html, body {
     background-color: #f0f8ff;
 }
 
+/* Estilos del nav */
 nav {
     background-color: #008080;
     padding: 5px; 
@@ -63,13 +64,15 @@ nav ul li a:hover {
 
     .menu-hamburguesa {
         display: block;
+        color: white; /* Aseguramos que el ícono sea visible */
+        z-index: 1000; /* Lo traemos al frente en caso de solapamiento */
     }
 
     /* Mostrar menú cuando esté activo */
     nav ul.active {
         display: flex;
     }
-}    
+}
 
 h1, h2 {
     color: #333;
