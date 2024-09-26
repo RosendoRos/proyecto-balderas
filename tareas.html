@@ -3,14 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenido</title>
+    <title>Gestión de Tareas</title>
+
     <link rel="stylesheet" href="css/normalize.css">
-    <link rel="preload" href="css/tareas.css" as="styles">
+    <link rel="preload" href="css/tareas.css" as="style">
     <link href="css/tareas.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
+    <style>
+       .circular-btn {
+            width: 40px; 
+            height: 40px;
+            border-radius: 50%;
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            padding: 0;
+            border: none; 
+            background-color: #007bff; 
+            color: white; 
+            transition: background-color 0.3s; 
+            outline: none;
+            margin-left: auto;
+        }
 
-    <!-- Barra de navegación -->
+        .circular-btn:hover {
+            background-color: #0056b3; 
+        }
+    </style>
     <nav>
         <ul>
             <li><a href="index.html">Gestión de Proyectos</a></li>
@@ -20,106 +41,116 @@
         </ul>
     </nav>
 
-    <!-- Buscador de tareas -->
-    <div class="search-bar">
-        <input type="text" id="searchInput" placeholder="Buscar tarea...">
-        <button onclick="buscarTarea()"><img src="./img/lupa.png" alt="Buscar" width="20"></button>
-    </div>
-
     <section class="servicio">
-        <h2>Gestión de Tareas</h2>
-        <p>Este apartado permitirá dividir el proyecto en tareas específicas que se puedan asignar a los miembros del equipo. Controlar el estado y el progreso de cada tarea es crucial para el éxito del proyecto.</p>
-        <h3>Subfunciones importantes:</h3>
-        <ul>
-            <li>Crear y asignar tareas</li>
-            <li>Establecer prioridades y fechas límite</li>
-            <li>Visualizar el estado de las tareas</li>
-        </ul>
+        <h2 style="margin-top: 10px;">Gestión de Tareas</h2>
 
-        <h3>Agregar Nueva Tarea</h3>
-        <input type="text" placeholder="Título de la tarea" id="nuevaTarea" />
-        <input type="date" id="nuevaFecha" />
-        <button class="button" onclick="agregarTarea()">Agregar Tarea</button>
+        <!-- Buscador de tareas -->
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Buscar tarea...">
+            <button onclick="buscarTarea()">
+                <img src="./img/lupa.png" alt="Buscar" width="20">
+            </button>
+        </div>
 
-        <table class="table" id="tablaTareas">
+        <!-- Mensaje cuando no hay tareas -->
+        <p id="mensajeSinTareas" style="display: none; text-align: center;">SIN TAREAS</p>
+
+        <!-- Tabla de tareas -->
+        <table class="table" id="tablaTareas" style="display: none; text-align: center">
             <thead>
                 <tr>
+                    <th>Número</th>
                     <th>Título</th>
                     <th>Fecha Límite</th>
                     <th>Estado</th>
+                    <th>Miembro</th>
+                    <th>Prioridad</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Tarea Ejemplo 1</td>
-                    <td>2024-09-30</td>
-                    <td><span class="complete-icon" onclick="toggleEstado(this)">⬜</span></td>
-                    <td>
-                        <button class="button">Editar</button>
-                        <button class="button" style="background-color: #dc3545;">Eliminar</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Tarea Ejemplo 2</td>
-                    <td>2024-10-05</td>
-                    <td><span class="complete-icon" onclick="toggleEstado(this)">✔️</span></td>
-                    <td>
-                        <button class="button">Editar</button>
-                        <button class="button" style="background-color: #dc3545;">Eliminar</button>
-                    </td>
-                </tr>
             </tbody>
         </table>
+        <div id="mensajeSinTareas" style="display: none;"></div>
+        <button id="botonRestaurar" style="display: none;" class="btn btn-secondary" onclick="restaurarTabla()">Restaurar</button>
+        
+        <div id="detalleTareaContainer"></div>
+                
+        <nav aria-label="Page navigation example" id="paginacion">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous" onclick="cambiarPagina(-1)">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#" onclick="cambiarPagina(1)">1</a></li>
+                <li class="page-item"><a class="page-link" href="#" onclick="cambiarPagina(2)">2</a></li>
+                <li class="page-item"><a class="page-link" href="#" onclick="cambiarPagina(3)">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next" onclick="cambiarPagina(1)">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>        
+
+        <div class="text-right mb-3">
+            <button class="btn btn-primary circular-btn" onclick="toggleMenu()">
+                <img width="30" height="30" src="https://img.icons8.com/ios/50/plus-math--v1.png" alt="plus-math--v1"/>        </div>
+        <div class="menu-option">
+            <div id="menuOpciones" style="display: none; text-align: right;">
+                <button class="btn btn-secondary" onclick="mostrarFormularioTarea()">Agregar Tarea</button>
+                <button class="btn btn-secondary" onclick="mostrarFormularioMiembro()">Agregar Miembro</button>
+            </div>
+        </div>
+
+        <!-- Formulario para agregar nuevas tareas -->
+        <div id="formularioTarea" style="display: none;">
+            <h3 id="tituloFormulario">Agregar Nueva Tarea</h3>
+            <div class="task-form">
+                <label for="nombreTarea">Nombre:</label>
+                <input type="text" id="nuevaTarea" placeholder="Título de la tarea" required>
+                <label for="fecha">Fecha:</label>
+                <input type="date" id="nuevaFecha" required>
+                <label for="miembro">Miembro:</label>
+                <select id="miembroSeleccionado" required>
+                    <option value="">Seleccionar miembro</option>
+                </select>
+                <label for="prioridad">Prioridad:</label>
+                <select id="prioridadSeleccionada">
+                    <option value="">Seleccionar Prioridad</option>
+                    <option value="baja">baja</option>
+                    <option value="normal" selected>normal</option>
+                    <option value="alta">alta</option>
+                </select>
+
+                <div class="task-form">
+                    <label for="detalles">Detalles:</label>
+                    <textarea id="detalles" rows="4" placeholder="Detalles de la tarea"></textarea>
+                </div>                
+
+                <div class="button-group" style="text-align: right;">
+                    <button id="botonGuardar" class="btn btn-primary" onclick="agregarTarea()">Agregar Tarea</button>
+                    <button class="btn btn-danger" onclick="ocultarFormularioTarea()">Cancelar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formulario para agregar miembros -->
+        <div id="formularioMiembro" style="display: none;">
+            <h3>Agregar Nuevo Miembro</h3>
+            <div class="task-form">
+                <input type="text" id="nuevoMiembroNombre" placeholder="Nombre del miembro" required>
+                <input type="email" id="nuevoMiembroEmail" placeholder="Email del miembro" required>
+                <div class="button-group" style="text-align: right;">
+                    <button class="btn btn-primary" onclick="agregarMiembro()">Agregar Miembro</button>
+                    <button class="btn btn-danger" onclick="ocultarFormularioMiembro()">Cancelar</button>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <script>
-        function toggleEstado(element) {
-            if (element.textContent === "✔️") { // Si está completada
-                element.textContent = "⬜"; // Volver a pendiente
-                element.classList.remove("checked"); // Cambia el color a rojo
-            } else {
-                element.textContent = "✔️"; // Marcar como completada
-                element.classList.add("checked"); // Cambia el color a verde
-            }
-        }
-
-        function buscarTarea() {
-            const input = document.getElementById("searchInput").value.toLowerCase();
-            const rows = document.querySelectorAll("#tablaTareas tbody tr");
-
-            rows.forEach(row => {
-                const title = row.querySelector("td").textContent.toLowerCase();
-                if (title.includes(input)) {
-                    row.style.display = "";
-                } else {
-                    row.style.display = "none";
-                }
-            });
-        }
-
-        function agregarTarea() {
-            const titulo = document.getElementById("nuevaTarea").value;
-            const fecha = document.getElementById("nuevaFecha").value;
-            const tabla = document.getElementById("tablaTareas").querySelector("tbody");
-
-            if (titulo && fecha) {
-                const nuevaFila = document.createElement("tr");
-                nuevaFila.innerHTML = `
-                    <td>${titulo}</td>
-                    <td>${fecha}</td>
-                    <td><span class="complete-icon" onclick="toggleEstado(this)">⬜</span></td>
-                    <td>
-                        <button class="button">Editar</button>
-                        <button class="button" style="background-color: #dc3545;">Eliminar</button>
-                    </td>
-                `;
-                tabla.appendChild(nuevaFila);
-            } else {
-                alert("Por favor, complete todos los campos.");
-            }
-        }
-    </script>
-
+    <!-- Script externo -->
+    <script src="js/script.js"></script>
 </body>
 </html>
