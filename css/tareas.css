@@ -86,6 +86,11 @@ p{
     margin-top: 10px;
 }
 
+.table-responsive {
+    overflow-x: auto; /* Permitir desplazamiento horizontal */
+    -webkit-overflow-scrolling: touch; /* Mejora el scroll en dispositivos táctiles */
+}
+
 .table {
     width: 100%;
     border-collapse: collapse;
@@ -101,6 +106,15 @@ p{
     background-color: #007BFF;
     color: white;
 }
+
+/* Asegura que la tabla sea legible en pantallas pequeñas */
+@media (max-width: 768px) {
+    .table th, .table td {
+        font-size: 12px;
+        padding: 5px;
+    }
+}
+
 
 .icon {
     margin-right: 5px;
