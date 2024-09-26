@@ -280,3 +280,33 @@ nav#paginacion {
     border-radius: 4px;
     color: #0056b3; 
 }
+
+.icon-group {
+    /* Para pantallas pequeñas, los íconos estarán apilados verticalmente */
+    justify-content: flex-start;
+}
+
+.icono-accion {
+    display: inline-block;
+    margin-bottom: 10px; /* Espaciado entre íconos en pantallas pequeñas */
+}
+
+@media (max-width: 768px) {
+    /* Íconos más grandes en pantallas pequeñas */
+    .icono-accion svg {
+        width: 24px;  /* Aumenta el tamaño del ícono */
+        height: 24px; /* Aumenta el tamaño del ícono */
+    }
+}
+
+@media (max-width: 576px) {
+    /* En pantallas muy pequeñas (móviles), hacer que los íconos se alineen verticalmente */
+    .icon-group {
+        flex-direction: column; /* Cambia a dirección vertical */
+        align-items: flex-start;
+    }
+
+    .icono-accion {
+        margin-bottom: 5px; /* Espaciado vertical más pequeño */
+    }
+}
